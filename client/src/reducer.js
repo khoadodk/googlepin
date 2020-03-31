@@ -11,6 +11,8 @@ export default function reducer(state, action) {
       return { ...state, currentUser: null, isAuth: false };
     case "UPDATE_DRAFT_LOCATION":
       return { ...state, draft: action.payload };
+    case "DELETE_DRAFT":
+      return { ...state, draft: null };
     default:
       return state;
   }

@@ -17,7 +17,7 @@ const Signout = ({ classes }) => {
       onLogoutSuccess={onSignOut}
       render={({ onClick }) => (
         <span className={classes.root} onClick={onClick}>
-          Sign Out
+          Log Out
           <ExitToAppIcon className={classes.buttonIcon} />
         </span>
       )}

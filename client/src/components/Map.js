@@ -7,6 +7,7 @@ import { withStyles } from "@material-ui/core/styles";
 
 import PinIcon from "./PinIcon";
 import Context from "../context";
+import Blog from "./Blog";
 
 const INITIAL_VIEWPORT = {
   latitude: 35.7804,
@@ -37,7 +38,7 @@ const Map = ({ classes }) => {
   const handleMapClick = ({ lngLat, leftButton }) => {
     // console.log(event);
     if (!leftButton) return;
-    console.log(lngLat);
+    // console.log(lngLat);
     // BEWARE HERE, LNG and LAT are switched
     dispatch({
       type: "UPDATE_DRAFT_LOCATION",
@@ -83,6 +84,9 @@ const Map = ({ classes }) => {
           </Marker>
         )}
       </ReactMapGL>
+
+      {/* Blog area to add pin content */}
+      <Blog />
     </div>
   );
 };
