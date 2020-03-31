@@ -21,6 +21,7 @@ const Login = ({ classes }) => {
       const data = await client.request(ME_QUERY);
       // console.log(data);
       dispatch({ type: "LOGIN_USER", payload: data.me });
+      dispatch({ type: "IS_LOGGED_IN", payload: googleUser.isSignedIn() });
     } catch (err) {
       onFailure(err);
     }
@@ -46,6 +47,7 @@ const Login = ({ classes }) => {
         onSuccess={onSuccess}
         onFailure={onFailure}
         isSignedIn={true}
+        buttonText="Sign in with Google"
         theme="dark"
       />
     </div>
