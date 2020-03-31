@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import ReactMapGL, { NavigationControl, Marker } from "react-map-gl";
 import { withStyles } from "@material-ui/core/styles";
 // import Button from "@material-ui/core/Button";
@@ -6,6 +6,7 @@ import { withStyles } from "@material-ui/core/styles";
 // import DeleteIcon from "@material-ui/icons/DeleteTwoTone";
 
 import PinIcon from "./PinIcon";
+import Context from "../context";
 
 const INITIAL_VIEWPORT = {
   latitude: 35.7804,
@@ -16,6 +17,8 @@ const INITIAL_VIEWPORT = {
 const Map = ({ classes }) => {
   const [viewport, setViewport] = useState(INITIAL_VIEWPORT);
   const [userPosition, setUserPosition] = useState(null);
+  const { state, dispatch } = useContext(Context);
+
   useEffect(() => {
     getUserPosition();
   }, []);
@@ -31,6 +34,17 @@ const Map = ({ classes }) => {
     }
   };
 
+  const handleMapClick = ({ lngLat, leftButton }) => {
+    // console.log(event);
+    if (!leftButton) return;
+    console.log(lngLat);
+    // BEWARE HERE, LNG and LAT are switched
+    dispatch({
+      type: "UPDATE_DRAFT_LOCATION",
+      payload: { latitude: lngLat[1], longitude: lngLat[0] }
+    });
+  };
+
   return (
     <div className={classes.root}>
       <ReactMapGL
@@ -40,6 +54,7 @@ const Map = ({ classes }) => {
         mapboxApiAccessToken="pk.eyJ1IjoiZGtraG9hIiwiYSI6ImNrM2RyMjNkbzExZ28zZHFlejBhcDMwZzQifQ.CXb5k5BjgR3qMlJcVgevBQ"
         onViewportChange={viewport => setViewport(viewport)}
         {...viewport}
+        onClick={handleMapClick}
       >
         {/* Navigation Control */}
         <div className={classes.navigationControl}>
@@ -48,13 +63,23 @@ const Map = ({ classes }) => {
           />
         </div>
 
-        {/* Pin for user's current postion */}
+        {/* Pin for user's current position */}
         {userPosition && (
           <Marker
             latitude={userPosition.latitude}
             longitude={userPosition.longitude}
           >
             <PinIcon size={40} color="red" />
+          </Marker>
+        )}
+
+        {/* Draft Pin */}
+        {state.draft && (
+          <Marker
+            latitude={state.draft.latitude}
+            longitude={state.draft.longitude}
+          >
+            <PinIcon size={40} color="hotpink" />
           </Marker>
         )}
       </ReactMapGL>
