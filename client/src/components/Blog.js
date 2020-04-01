@@ -5,19 +5,22 @@ import { Paper } from "@material-ui/core";
 import Context from "../context";
 import NoContent from "./Pin/NoContent";
 import CreatePin from "./Pin/CreatePin";
+import PinContent from "./Pin/PinContent";
 
 const Blog = ({ classes }) => {
   const { state } = useContext(Context);
+  const { draft, currentPin } = state;
 
   let BlogContent;
-  if (!state.draft) {
+  if (!draft && !currentPin) {
     // display no content
     BlogContent = NoContent;
-  } else if (state.draft) {
+  } else if (draft && !currentPin) {
     // create a pin
     BlogContent = CreatePin;
-  } else {
-    //
+  } else if (!draft && currentPin) {
+    // show blog content to the created pin
+    BlogContent = PinContent;
   }
 
   return (

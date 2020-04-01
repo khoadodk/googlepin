@@ -21,7 +21,8 @@ export default function reducer(state, action) {
       const prevPins = state.pins.filter(pin => pin._id !== newPin._id);
       return {
         ...state,
-        pins: [...prevPins, newPin]
+        pins: [...prevPins, newPin],
+        currentPin: null
       };
     // select pin for popup
     case "SET_PIN":
