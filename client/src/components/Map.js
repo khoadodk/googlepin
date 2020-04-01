@@ -9,6 +9,9 @@ import PinIcon from "./PinIcon";
 import Context from "../context";
 import Blog from "./Blog";
 
+import { useClient } from "../clientHook";
+import { GET_PINS_QUERY } from "../graphql/queries";
+
 const INITIAL_VIEWPORT = {
   latitude: 35.7804,
   longitude: -78.6391,
@@ -19,9 +22,11 @@ const Map = ({ classes }) => {
   const [viewport, setViewport] = useState(INITIAL_VIEWPORT);
   const [userPosition, setUserPosition] = useState(null);
   const { state, dispatch } = useContext(Context);
+  const client = useClient();
 
   useEffect(() => {
     getUserPosition();
+    getPins();
   }, []);
 
   const getUserPosition = () => {
@@ -35,11 +40,18 @@ const Map = ({ classes }) => {
     }
   };
 
+  const getPins = async () => {
+    const { getPins } = await client.request(GET_PINS_QUERY);
+    // Get the pins from graphql query and dispatch
+    // console.log(getPins);
+    dispatch({ type: "GET_PINS", payload: getPins });
+  };
+
   const handleMapClick = ({ lngLat, leftButton }) => {
     // console.log(event);
     if (!leftButton) return;
     // console.log(lngLat);
-    // BEWARE HERE, LNG and LAT are switched
+    // BEWARE HERE, LONG and LAT are switched
     dispatch({
       type: "UPDATE_DRAFT_LOCATION",
       payload: { latitude: lngLat[1], longitude: lngLat[0] }
@@ -83,6 +95,17 @@ const Map = ({ classes }) => {
             <PinIcon size={40} color="hotpink" />
           </Marker>
         )}
+
+        {/* Show all pins to map */}
+        {state.pins.map(pin => (
+          <Marker
+            key={pin._id}
+            latitude={pin.latitude}
+            longitude={pin.longitude}
+          >
+            <PinIcon size={40} color="darkblue" />
+          </Marker>
+        ))}
       </ReactMapGL>
 
       {/* Blog area to add pin content */}
