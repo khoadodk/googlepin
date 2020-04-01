@@ -23,6 +23,18 @@ export default function reducer(state, action) {
         ...state,
         pins: [...prevPins, newPin]
       };
+    // select pin for popup
+    case "SET_PIN":
+      return {
+        ...state,
+        currentPin: action.payload,
+        // not allow user to make new draft if there is a pop up
+        draft: null
+      };
+    case "DELETE_PIN":
+      const deletePin = action.payload;
+      const filteredPins = state.pins.filter(pin => pin._id !== deletePin._id);
+      return { ...state, pins: filteredPins, currentPin: null };
     default:
       return state;
   }
