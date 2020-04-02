@@ -1,6 +1,8 @@
 # Google Pin / Travel Log
 
-Tech stack: GraphQL, React, Material UI, Google OAuth, MongoDB  
+Tech stack: GraphQL, React, Material UI, Google OAuth, MongoDB
+
+<hr>
 ![Image description](https://github.com/khoadodk/googlepin/blob/master/HOMEPAGE.PNG)
 
 ## App Features
@@ -11,6 +13,6 @@ Tech stack: GraphQL, React, Material UI, Google OAuth, MongoDB
 4. CRUD Comments
 5. CRUD Pins
 
-Todos:
+### Todos:
 
 -Edit/Delete Comments
