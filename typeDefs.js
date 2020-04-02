@@ -44,4 +44,11 @@ module.exports = gql`
     deletePin(pinId: ID!): Pin
     createComment(pinId: ID!, text: String!): Pin
   }
+
+  # Realtime listener for pin
+  type Subscription {
+    pinAdded: Pin
+    pinDeleted: Pin
+    pinUpdated: Pin
+  }
 `;

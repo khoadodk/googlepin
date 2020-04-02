@@ -61,8 +61,8 @@ const CreatePin = ({ classes }) => {
         longitude
       });
       handleDeleteDraft();
-      console.log("PIN CREATED", createPin);
-      dispatch({ type: "CREATE_PINS", payload: createPin });
+      // console.log("PIN CREATED", createPin);
+      // dispatch({ type: "CREATE_PINS", payload: createPin });
     } catch (err) {
       setSubmitting(false);
       console.error("Error creating pin", err);
