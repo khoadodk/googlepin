@@ -45,7 +45,7 @@ const Login = ({ classes }) => {
         Welcome to Google Pin
       </Typography>
       <GoogleLogin
-        clientId="659726176561-fsnlg5uq75kjl4f83nk597a01e77177l.apps.googleusercontent.com"
+        clientId="659726176561-559nftlj1oitah6v3e6u133cjn13d0sd.apps.googleusercontent.com"
         onSuccess={onSuccess}
         onFailure={onFailure}
         isSignedIn={true}
