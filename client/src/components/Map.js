@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import DeleteIcon from "@material-ui/icons/DeleteTwoTone";
 import differenceInMinutes from "date-fns/difference_in_minutes";
 import { Subscription } from "react-apollo";
+import { unstable_useMediaQuery as useMediaQuery } from "@material-ui/core/useMediaQuery";
 
 import PinIcon from "./PinIcon";
 import Context from "../context";
@@ -32,6 +33,7 @@ const Map = ({ classes }) => {
   const [userPosition, setUserPosition] = useState(null);
   const { state, dispatch } = useContext(Context);
   const [popup, setPopup] = useState(null);
+  const mobileSize = useMediaQuery("(max-width: 650px)");
 
   useEffect(() => {
     getUserPosition();
@@ -94,7 +96,7 @@ const Map = ({ classes }) => {
   // Allow user to delete their pins
   const isAuthUser = () => state.currentUser._id === popup.author._id;
   return (
-    <div className={classes.root}>
+    <div className={mobileSize ? classes.rootMobile : classes.root}>
       <ReactMapGL
         width="100vw"
         height="calc(100vh - 64px)"
@@ -103,6 +105,7 @@ const Map = ({ classes }) => {
         onViewportChange={viewport => setViewport(viewport)}
         {...viewport}
         onClick={handleMapClick}
+        scrollZoom={!mobileSize}
       >
         {/* Navigation Control */}
         <div className={classes.navigationControl}>
