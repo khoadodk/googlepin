@@ -44,7 +44,14 @@ export default function reducer(state, action) {
     case "DELETE_PIN":
       const deletePin = action.payload;
       const filteredPins = state.pins.filter(pin => pin._id !== deletePin._id);
-      return { ...state, pins: filteredPins, currentPin: null };
+      // stop rerendering for all users when a pin is deleted
+      if (state.currentPin) {
+        const isCurrentPin = deletePin._id === state.currentPin._id;
+        if (isCurrentPin) {
+          return { ...state, pins: filteredPins, currentPin: null };
+        }
+      }
+      return { ...state, pins: filteredPins };
 
     case "CREATE_COMMENT":
       const updatedCurrentPin = action.payload;

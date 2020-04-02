@@ -35,6 +35,15 @@ const Map = ({ classes }) => {
   const [popup, setPopup] = useState(null);
   const mobileSize = useMediaQuery("(max-width: 650px)");
 
+  // remove popup if pin is deleted by the author
+  useEffect(() => {
+    const pinExists =
+      popup && state.pins.findIndex(pin => pin._id === popup._id) > -1;
+    if (!pinExists) {
+      setPopup(null);
+    }
+  }, [state.pins.length]);
+
   useEffect(() => {
     getUserPosition();
     getPins();
