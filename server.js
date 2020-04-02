@@ -19,6 +19,10 @@ mongoose
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  // set playground available on production
+  introspection: true,
+  playground: true,
+
   //   get token from the headers
   context: async ({ req }) => {
     let authToken = null;

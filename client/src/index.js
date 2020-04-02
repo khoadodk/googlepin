@@ -17,8 +17,13 @@ import { ApolloClient } from "apollo-client";
 import { WebSocketLink } from "apollo-link-ws";
 import { InMemoryCache } from "apollo-cache-inmemory";
 
+const webSocketURL =
+  process.env.NODE_ENV === "production"
+    ? "wss://googlepin.herokuapp.com/graphql"
+    : "ws://localhost:4000/graphql";
+
 const wslink = new WebSocketLink({
-  uri: "ws://localhost:4000/graphql",
+  uri: webSocketURL,
   options: {
     reconnect: true
   }
@@ -52,4 +57,4 @@ ReactDOM.render(<Root />, document.getElementById("root"));
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister();
+serviceWorker.register();

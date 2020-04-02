@@ -2,7 +2,9 @@ import { useState, useEffect } from "react";
 import { GraphQLClient } from "graphql-request";
 
 export const BASE_URL =
-  process.env.NODE_ENV === "production" ? "" : "http://localhost:4000/graphql";
+  process.env.NODE_ENV === "production"
+    ? "https://googlepin.herokuapp.com/graphql"
+    : "http://localhost:4000/graphql";
 
 export const useClient = () => {
   const [idToken, setIdToken] = useState("");
