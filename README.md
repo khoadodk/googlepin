@@ -1,7 +1,7 @@
 # Google Pin / Travel Log
 
-Tech stack: GraphQL, React, Material UI, Google OAuth, MongoDB
-You can check this app at : https://googlepin-khoado.netlify.com/
+- Tech stack: GraphQL, React, Material UI, Google OAuth, MongoDB
+- You can check this app at : https://googlepin-khoado.netlify.com/
 
 <hr>
 
