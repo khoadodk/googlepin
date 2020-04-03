@@ -4,6 +4,7 @@ Tech stack: GraphQL, React, Material UI, Google OAuth, MongoDB
 You can check this app at : https://googlepin-khoado.netlify.com/
 
 <hr>
+
 ![Image description](https://github.com/khoadodk/googlepin/blob/master/HOMEPAGE.PNG)
 
 ## App Features
@@ -16,4 +17,4 @@ You can check this app at : https://googlepin-khoado.netlify.com/
 
 ### Todos:
 
--Edit/Delete Comments
+- <del>Edit/Delete Comments</del>
