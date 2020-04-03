@@ -59,3 +59,29 @@ export const CREATE_COMMENT_MUTATION = `
         }
     }
 `;
+
+export const DELETE_COMMENT_MUTATION = `
+    mutation($commentId: ID!, $pinId: ID!) {
+        deleteComment(commentId: $commentId, pinId: $pinId){
+            _id
+            createdAt
+            title
+            content
+            image
+            latitude
+            longitude
+            author {
+                _id
+                name
+            }
+            comments {
+                text
+                createdAt
+                author {
+                    name
+                    picture
+                }
+            }
+        }
+    }
+`;

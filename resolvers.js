@@ -66,6 +66,16 @@ module.exports = {
       pubsub.publish(PIN_UPDATED, { pinUpdated });
 
       return pinUpdated;
+    }),
+    deleteComment: authenticated(async (root, args, ctx) => {
+      const pinUpdated = await Pin.findOneAndUpdate(
+        { _id: args.pinId },
+        { $pull: { comments: { _id: args.commentId } } },
+        { new: true }
+      )
+        .populate("author")
+        .populate("comments.author");
+      return pinUpdated;
     })
   },
   Subscription: {

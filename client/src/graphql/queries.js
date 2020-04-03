@@ -26,6 +26,7 @@ export const GET_PINS_QUERY = `
                 picture
             }
             comments {
+                _id
                 text
                 createdAt
                 author {

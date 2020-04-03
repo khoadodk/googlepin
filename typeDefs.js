@@ -21,6 +21,7 @@ module.exports = gql`
   }
 
   type Comment {
+    _id: ID
     text: String
     createdAt: String
     author: User
@@ -43,6 +44,7 @@ module.exports = gql`
     createPin(input: CreatePinInput!): Pin
     deletePin(pinId: ID!): Pin
     createComment(pinId: ID!, text: String!): Pin
+    deleteComment(commentId: ID!, pinId: ID!): Pin
   }
 
   # Realtime listener for pin
